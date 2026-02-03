@@ -1,0 +1,84 @@
+# =========================
+# .NET / Visual Studio
+# =========================
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa]rm/
+[Aa]rm64/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio files
+.vs/
+.vscode/
+.idea/
+
+# Rider
+*.sln.iml
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Logs
+*.log
+
+# =========================
+# OS junk files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Test Results
+# =========================
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# =========================
+# Publish outputs
+# =========================
+**/publish/
+**/app.publish/
+
+# =========================
+# User secrets / appsettings
+# =========================
+**/appsettings.*.json
+!**/appsettings.json
+
+# If you have secrets in appsettings.Development.json, keep it ignored.
+# You can keep an example file:
+**/appsettings.Development.json
+**/appsettings.Production.json
+
+# =========================
+# EF Core
+# =========================
+**/Migrations/*.cs
+!**/Migrations/*ContextModelSnapshot.cs
+
+# =========================
+# Others
+# =========================
+*.pdb
+*.cache
+*.tmp
