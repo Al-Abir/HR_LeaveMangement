@@ -24,7 +24,7 @@ namespace HR.LeaveMangement.Domain
         public string? RequestCommnents {  get; set; }
 
 
-        public DateTime DateActioned { get; set; }
+        public DateTime? DateActioned { get; set; }
 
         public bool? Aprroved { get; set; }
 
