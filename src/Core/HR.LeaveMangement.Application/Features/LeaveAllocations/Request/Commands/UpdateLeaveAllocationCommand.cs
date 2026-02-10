@@ -1,4 +1,6 @@
-﻿using HR.LeaveMangement.Application.Features.LeaveTypes.Requests.Queries;
+﻿
+using HR.LeaveMangement.Application.DTOs.LeaveAllocation;
+using HR.LeaveMangement.Application.Features.LeaveTypes.Requests.Queries;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -10,6 +12,6 @@ namespace HR.LeaveMangement.Application.Features.LeaveAllocations.Request.Comman
 {
     public class UpdateLeaveAllocationCommand : IRequest<Unit>
     {
-        public UpdateLeaveAllocationCommand leaveAllocationCommand { get; set; }
+        public LeaveAllocationsDto LeaveAllocationsDto { get; set; }
     }
 }

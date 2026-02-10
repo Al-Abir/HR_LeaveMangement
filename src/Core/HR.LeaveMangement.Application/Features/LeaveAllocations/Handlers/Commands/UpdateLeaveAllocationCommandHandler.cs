@@ -20,9 +20,15 @@ namespace HR.LeaveMangement.Application.Features.LeaveAllocations.Handlers.Comma
             _leaveAllocationRepository = leaveAllocationRepository;
             _mapper = mapper;
         }
-        public Task<Unit> Handle(UpdateLeaveAllocationCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateLeaveAllocationCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var leaveAllocation = await _leaveAllocationRepository.Get(request.LeaveAllocationsDto.Id);
+
+             _mapper.Map(request.LeaveAllocationsDto, leaveAllocation);
+
+            await _leaveAllocationRepository.Update(leaveAllocation);
+
+            return Unit.Value;
         }
     }
 }
