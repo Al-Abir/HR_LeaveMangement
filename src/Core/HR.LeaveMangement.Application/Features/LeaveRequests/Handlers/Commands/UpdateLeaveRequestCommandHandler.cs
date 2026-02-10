@@ -24,9 +24,9 @@ namespace HR.LeaveMangement.Application.Features.LeaveRequests.Handlers.Commands
         {
             var leaveRequest = await _leaveRequestRepository.Get(request.Id);
 
-            if (request.LeaveRequestDto !=null)
+            if (request.UpdateLeaveRequestDto !=null)
             {
-                _mapper.Map(request.LeaveRequestDto, leaveRequest);
+                _mapper.Map(request.UpdateLeaveRequestDto, leaveRequest);
                 await _leaveRequestRepository.Update(leaveRequest);
             }else if(request.ChangeLeaveRequestApprovalDto != null)
             {

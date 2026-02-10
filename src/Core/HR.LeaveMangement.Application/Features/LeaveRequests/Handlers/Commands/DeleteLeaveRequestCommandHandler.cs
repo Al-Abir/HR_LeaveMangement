@@ -22,7 +22,7 @@ namespace HR.LeaveMangement.Application.Features.LeaveRequests.Handlers.Commands
         public async Task Handle(DeleteLeaveRequestCommand request, CancellationToken cancellationToken)
         {
           var leaveRquest = await _leaveRequestRepository.Get(request.Id);
-            await _leaveRequestRepository.Delete(leaveRquest.Id);
+            await _leaveRequestRepository.Delete(leaveRquest);
             return;
         }
     }

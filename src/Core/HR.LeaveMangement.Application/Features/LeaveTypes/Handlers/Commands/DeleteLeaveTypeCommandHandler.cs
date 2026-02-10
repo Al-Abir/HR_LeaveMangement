@@ -25,7 +25,7 @@ namespace HR.LeaveMangement.Application.Features.LeaveTypes.Handlers.Commands
            var leaveType = await  _leaveTypeRepository.Get(request.Id);
             if (leaveType != null) { 
            
-            await _leaveTypeRepository.Delete(leaveType.Id);
+            await _leaveTypeRepository.Delete(leaveType);
             }
 
             return;

@@ -26,7 +26,7 @@ namespace HR.LeaveMangement.Application.Features.LeaveAllocations.Handlers.Comma
         {
             var leaveAllocation = await _leaveAllocationRepository.Get(request.Id);
 
-            await _leaveAllocationRepository.Delete(leaveAllocation.Id);
+            await _leaveAllocationRepository.Delete(leaveAllocation);
             return;
         }
     }

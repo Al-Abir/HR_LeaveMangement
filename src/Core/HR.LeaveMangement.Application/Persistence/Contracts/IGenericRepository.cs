@@ -13,6 +13,6 @@ namespace HR.LeaveMangement.Application.Persistence.Contracts
         Task<List<T>> GetAll();
         Task<T> Add(T entity);
         Task<T> Update(T entity);
-        Task Delete(int id);
+        Task Delete(T entity);
     }
 }
