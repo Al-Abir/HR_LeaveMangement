@@ -1,4 +1,5 @@
 ﻿using HR.LeaveMangement.Application.DTOs.LeaveAllocation;
+using HR.LeaveMangement.Application.Responses;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HR.LeaveMangement.Application.Features.LeaveAllocations.Request.Commands
 {
-    public class CreateLeaveAllocationCommand : IRequest<int>
+    public class CreateLeaveAllocationCommand : IRequest<BaseCommnandResponse>
     {
         public CreateLeaveAllocationDto LeaveAllocationDto { get; set; }
     }

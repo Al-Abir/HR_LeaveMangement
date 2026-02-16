@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FluentValidation;
+using HR.LeaveMangement.Application.Exceptions;
 using HR.LeaveMangement.Application.DTOs.LeaveAllocation.Validators;
 using HR.LeaveMangement.Application.Features.LeaveAllocations.Request.Commands;
 using HR.LeaveMangement.Application.Persistence.Contracts;
@@ -32,7 +32,7 @@ namespace HR.LeaveMangement.Application.Features.LeaveAllocations.Handlers.Comma
 
             if (validationResult.IsValid == false) 
             {
-                throw new Exception();
+                throw new ValidationException(validationResult);
             }
 
             var leaveAllocation = await _leaveAllocationRepository.Get(request.LeaveAllocationsDto.Id);
