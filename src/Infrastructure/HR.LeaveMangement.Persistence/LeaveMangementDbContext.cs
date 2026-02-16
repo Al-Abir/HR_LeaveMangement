@@ -9,12 +9,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 namespace HR.LeaveMangement.Persistence
 {
-    public class LeaveMangementDbContext:DbContext
+    public class LeaveMangementDbContext : DbContext
     {
 
         public LeaveMangementDbContext(DbContextOptions<LeaveMangementDbContext> options)
         {
-            
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -24,10 +24,11 @@ namespace HR.LeaveMangement.Persistence
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            foreach (var entry in ChangeTracker.Entries<BaseDomainEntity>()){
+            foreach (var entry in ChangeTracker.Entries<BaseDomainEntity>())
+            {
 
                 entry.Entity.LastModifiedDate = DateTime.Now;
-                if(entry.State == EntityState.Added)
+                if (entry.State == EntityState.Added)
                 {
                     entry.Entity.DateCreated = DateTime.Now;
                 }
