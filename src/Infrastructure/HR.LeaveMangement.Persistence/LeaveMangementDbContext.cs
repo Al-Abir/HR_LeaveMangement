@@ -12,11 +12,8 @@ namespace HR.LeaveMangement.Persistence
     public class LeaveMangementDbContext : DbContext
     {
 
-        public LeaveMangementDbContext(DbContextOptions<LeaveMangementDbContext> options)
-        {
-
-        }
-
+        public LeaveMangementDbContext(DbContextOptions<LeaveMangementDbContext> options) :base(options) { }
+       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(LeaveMangementDbContext).Assembly);
