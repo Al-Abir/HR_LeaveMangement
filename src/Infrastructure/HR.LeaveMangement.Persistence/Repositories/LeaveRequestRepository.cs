@@ -1,5 +1,7 @@
-﻿using HR.LeaveMangement.Application.Persistence.Contracts;
+﻿using HR.LeaveMangement.Application.Exceptions;
+using HR.LeaveMangement.Application.Persistence.Contracts;
 using HR.LeaveMangement.Domain;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,19 +20,34 @@ namespace HR.LeaveMangement.Persistence.Repositories
         
         }
         
-        public Task ChangeApprovalStatus(LeaveRequest leaveRequest, bool? ApprovalStatus)
+        public async Task ChangeApprovalStatus(LeaveRequest leaveRequest, bool? ApprovalStatus)
         {
-            throw new NotImplementedException();
+             leaveRequest.Aprroved = ApprovalStatus;
+             _dbContext.Entry(leaveRequest).State = EntityState.Modified;     
+             await _dbContext.SaveChangesAsync();
         }
 
-        public Task<LeaveRequest> GetLeaveRequestsWithDetails(int id)
+        public async Task<LeaveRequest> GetLeaveRequestsWithDetails(int id)
         {
-            throw new NotImplementedException();
+            var leaveRequest = await _dbContext.LeaveRequests
+                .Include(q => q.LeaveType)
+                .FirstOrDefaultAsync(q => q.Id == id);
+           
+            if (leaveRequest == null)
+            {
+                throw new NotFoundException(nameof(LeaveRequest), id);
+            }
+
+            return leaveRequest;
         }
 
-        public Task<List<LeaveRequest>> GetLeaveRequestsWithDetails()
+        public async Task<List<LeaveRequest>> GetLeaveRequestsWithDetails()
         {
-            throw new NotImplementedException();
+            var leaveRequests = await _dbContext.LeaveRequests
+              .Include(q => q.LeaveType)
+              .ToListAsync();
+
+            return leaveRequests;
         }
     }
 }
