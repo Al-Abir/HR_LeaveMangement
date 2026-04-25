@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using HR.LeaveMangement.Application.Persistence.Contracts;
+using HR.LeaveMangement.Application.Contracts.Persistence;
 using HR.LeaveMangement.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

@@ -1,5 +1,5 @@
 ﻿using HR.LeaveMangement.Application.Exceptions;
-using HR.LeaveMangement.Application.Persistence.Contracts;
+using HR.LeaveMangement.Application.Contracts.Persistence;
 using HR.LeaveMangement.Domain;
 using HR.LeaveMangement.Persistence;
 using Microsoft.EntityFrameworkCore;

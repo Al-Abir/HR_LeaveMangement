@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using HR.LeaveMangement.Application.Persistence.Contracts;
+using HR.LeaveMangement.Application.Contracts.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;

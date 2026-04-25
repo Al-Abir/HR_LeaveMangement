@@ -1,4 +1,4 @@
-﻿using HR.LeaveMangement.Application.Persistence.Contracts;
+﻿using HR.LeaveMangement.Application.Contracts.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
