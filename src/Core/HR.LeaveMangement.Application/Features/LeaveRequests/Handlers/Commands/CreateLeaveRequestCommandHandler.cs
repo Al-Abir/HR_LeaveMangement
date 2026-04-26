@@ -55,7 +55,7 @@ namespace HR.LeaveMangement.Application.Features.LeaveRequests.Handlers.Commands
                 response.Id = leaveRequest.Id;
 
 
-                var email = new Email
+                var email = new EmailModel
                 {
                     To = "employee@org.com",
                     Body = $"Your Leave request for {request.LeaveRequestDto.StartDate:D} to {request.LeaveRequestDto.EndDate:D}" + $"has been submitted suceessfully.",

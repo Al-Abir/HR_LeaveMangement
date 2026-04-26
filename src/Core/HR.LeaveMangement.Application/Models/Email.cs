@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HR.LeaveMangement.Application.Models
 {
-    public class Email
+    public class EmailModel
     {
         public string To { get; set; }
 
