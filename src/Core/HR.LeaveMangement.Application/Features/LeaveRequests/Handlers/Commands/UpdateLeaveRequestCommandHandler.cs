@@ -27,7 +27,7 @@ namespace HR.LeaveMangement.Application.Features.LeaveRequests.Handlers.Commands
         {
             var validator = new UpdateLeaveRequestDtoValidator(_leaveTypeRepository);
 
-            var validationResult = await validator.ValidateAsync(request.UpdateLeaveRequestDto);
+            var validationResult = await validator.ValidateAsync(request.LeaveRequestDto);
 
             if (validationResult.IsValid == false)
             {
@@ -35,9 +35,9 @@ namespace HR.LeaveMangement.Application.Features.LeaveRequests.Handlers.Commands
             }
             var leaveRequest = await _leaveRequestRepository.Get(request.Id);
 
-            if (request.UpdateLeaveRequestDto !=null)
+            if (request.LeaveRequestDto !=null)
             {
-                _mapper.Map(request.UpdateLeaveRequestDto, leaveRequest);
+                _mapper.Map(request.LeaveRequestDto, leaveRequest);
                 await _leaveRequestRepository.Update(leaveRequest);
             }else if(request.ChangeLeaveRequestApprovalDto != null)
             {
