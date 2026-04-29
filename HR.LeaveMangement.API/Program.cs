@@ -1,41 +1,20 @@
-﻿using HR.LeaveMangement.Application;
-using HR.LeaveMangement.Infrastructure;
-using HR.LeaveMangement.Persistence;
-using Microsoft.Extensions.Configuration;
-var builder = WebApplication.CreateBuilder(args);
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
-// Add services to the container.
-builder.Services.ConfigureApplicationServices();
-// builder.Configuration যোগ করুন
-builder.Services.ConfigureInfrastructureServices(builder.Configuration);
-builder.Services.ConfigurePersistenceServices(builder.Configuration);
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddCors(o =>
+namespace HR.LeaveManagement.API
 {
-    o.AddPolicy("CorsPolicy",
-        builder => builder.AllowAnyOrigin()
-        .AllowAnyMethod()
-        .AllowAnyHeader());
-});
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            CreateHostBuilder(args).Build().Run();
+        }
 
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>(); // 🔥 Startup use হচ্ছে
+                });
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
