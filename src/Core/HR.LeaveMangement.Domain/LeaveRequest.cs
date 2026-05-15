@@ -25,7 +25,7 @@ namespace HR.LeaveMangement.Domain
 
         public DateTime? DateActioned { get; set; }
 
-        public bool? Aprroved { get; set; }
+        public bool? Approved { get; set; }
 
         public bool Cancelled { get; set; }
 

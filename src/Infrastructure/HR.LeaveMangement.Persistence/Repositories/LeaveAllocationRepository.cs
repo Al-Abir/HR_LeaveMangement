@@ -39,5 +39,22 @@ namespace HR.LeaveMangement.Persistence.Repositories
                 .Include(q => q.LeaveType)
                 .ToListAsync();
         }
+
+        public async Task<LeaveAllocation> GetUserAllocation(string employeeId, int leaveTypeId, int period)
+        {
+            var allocation = await _dbContext.LeaveAllocation
+                .Include(x => x.LeaveType)
+                .FirstOrDefaultAsync(x =>
+                    x.EmployeeId == employeeId &&
+                    x.LeaveTypeId == leaveTypeId &&
+                    x.Period == period);
+
+            if (allocation == null)
+            {
+                throw new NotFoundException(nameof(LeaveAllocation), 0);
+            }
+
+            return allocation;
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace HR.LeaveMangement.Application.Contracts.Persistence
     {
         Task<LeaveAllocation> GetLeaveAllocationWithDetails(int id);
         Task<List<LeaveAllocation>> GetLeaveAllocationWithDetails();
+        Task<LeaveAllocation> GetUserAllocation(string employeeId, int leaveTypeId, int period);
     }
 }

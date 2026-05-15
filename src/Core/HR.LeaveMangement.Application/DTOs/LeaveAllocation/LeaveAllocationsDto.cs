@@ -9,13 +9,20 @@ using System.Threading.Tasks;
 
 namespace HR.LeaveMangement.Application.DTOs.LeaveAllocation
 {
-    public class LeaveAllocationsDto: BaseDto
-    {
+    
 
-        public int NumberOfDays { get; set; }
-        public LeaveTypeDto LeaveType { get; set; } = default!;
-        public int LeaveTypeId { get; set; }
-        public int Period { get; set; }
+        public class LeaveAllocationsDto : BaseDto
+        {
+            public string EmployeeId { get; set; } = string.Empty;
 
-    }
+            public int NumberOfDays { get; set; }
+
+            public LeaveTypeDto LeaveType { get; set; } = default!;
+
+            public int LeaveTypeId { get; set; }
+
+            public int Period { get; set; }
+        }
+
+   
 }

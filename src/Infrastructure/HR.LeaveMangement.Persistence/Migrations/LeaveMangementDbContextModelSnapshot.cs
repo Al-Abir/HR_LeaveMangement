@@ -36,6 +36,10 @@ namespace HR.LeaveMangement.Persistence.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("EmployeeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -66,7 +70,7 @@ namespace HR.LeaveMangement.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool?>("Aprroved")
+                    b.Property<bool?>("Approved")
                         .HasColumnType("bit");
 
                     b.Property<bool>("Cancelled")

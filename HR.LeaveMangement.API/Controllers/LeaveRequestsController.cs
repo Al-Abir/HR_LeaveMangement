@@ -83,22 +83,26 @@ namespace HR.LeaveMangement.API.Controllers
         }
 
         
-        //ADMIN: Approve / Reject
-        // ==================================================
+  
+
+
+
         [HttpPut("changeapproval/{id}")]
         [Authorize(Roles = "Administrator")]
-        public async Task<ActionResult> ChangeApproval(int id, [FromBody] ChangeLeaveRequestApprovalDto dto)
+        public async Task<ActionResult> ChangeApproval(
+    int id,
+    [FromBody] ChangeLeaveRequestApprovalDto dto)
         {
-            var command = new UpdateLeaveRequestCommand
+            var command = new ChangeLeaveRequestApprovalCommand
             {
                 Id = id,
-                ChangeLeaveRequestApprovalDto = dto
+                Approved = dto.Approved
             };
 
             await _mediator.Send(command);
+
             return NoContent();
         }
-
         // ==================================================
         // 🧑‍💼 ADMIN: Delete request
         // ==================================================

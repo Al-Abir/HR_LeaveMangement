@@ -22,7 +22,7 @@ namespace HR.LeaveMangement.Persistence.Repositories
         
         public async Task ChangeApprovalStatus(LeaveRequest leaveRequest, bool? ApprovalStatus)
         {
-             leaveRequest.Aprroved = ApprovalStatus;
+             leaveRequest.Approved = ApprovalStatus;
              _dbContext.Entry(leaveRequest).State = EntityState.Modified;     
              await _dbContext.SaveChangesAsync();
         }
