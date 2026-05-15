@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HR.LeaveMangement.Application.Contracts.Identity;
 using HR.LeaveMangement.Application.Contracts.Infrastructure;
 using HR.LeaveMangement.Application.Contracts.Persistence;
 using HR.LeaveMangement.Application.DTOs.LeaveRequest.Validators;
@@ -24,14 +25,15 @@ namespace HR.LeaveMangement.Application.Features.LeaveRequests.Handlers.Commands
         private readonly ILeaveRequestRepository _leaveRequestTypeRepository;
         private readonly IEmailSender _emailSender;
         private readonly ILeaveTypeRepository _leaveTypeRepository;
-        public CreateLeaveRequestCommandHandler(ILeaveRequestRepository leaveRequestRepository,ILeaveTypeRepository leaveTypeRepository, IEmailSender emailSender, IMapper mapper)
+        private readonly IUserService _userService;
+        public CreateLeaveRequestCommandHandler(ILeaveRequestRepository leaveRequestRepository,ILeaveTypeRepository leaveTypeRepository, IEmailSender emailSender, IMapper mapper, IUserService userService)
         {
             _leaveRequestTypeRepository = leaveRequestRepository;
             _emailSender = emailSender;
             _mapper = mapper;
             _leaveTypeRepository = leaveTypeRepository;
-           
-            
+            _userService = userService;
+
         }
         public async Task<BaseCommnandResponse> Handle(CreateLeaveRequestCommand request, CancellationToken cancellationToken)
         {
@@ -48,12 +50,14 @@ namespace HR.LeaveMangement.Application.Features.LeaveRequests.Handlers.Commands
             {
                 var leaveRequest = _mapper.Map<LeaveRequest>(request.LeaveRequestDto);
 
+                // ✅ STEP 9 — এখানে UserId বসাবে
+                leaveRequest.RequestingEmployeeId = _userService.UserId;
+
                 leaveRequest = await _leaveRequestTypeRepository.Add(leaveRequest);
 
                 response.Success = true;
                 response.Message = " Request Created Successfully ";
                 response.Id = leaveRequest.Id;
-
 
                 var email = new EmailModel
                 {

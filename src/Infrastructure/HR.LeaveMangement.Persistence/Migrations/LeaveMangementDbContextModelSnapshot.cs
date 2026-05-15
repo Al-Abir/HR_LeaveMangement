@@ -99,6 +99,10 @@ namespace HR.LeaveMangement.Persistence.Migrations
                     b.Property<string>("RequestCommnents")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("RequestingEmployeeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 

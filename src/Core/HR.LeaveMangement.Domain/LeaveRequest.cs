@@ -10,7 +10,7 @@ namespace HR.LeaveMangement.Domain
     public class LeaveRequest : BaseDomainEntity
     {
 
-       
+
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
@@ -21,13 +21,15 @@ namespace HR.LeaveMangement.Domain
 
         public DateTime DateRequested { get; set; }
 
-        public string? RequestCommnents {  get; set; }
-
+        public string? RequestCommnents { get; set; }
 
         public DateTime? DateActioned { get; set; }
 
         public bool? Aprroved { get; set; }
 
         public bool Cancelled { get; set; }
+
+        // IMPORTANT
+        public string RequestingEmployeeId { get; set; } = string.Empty;
     }
 }

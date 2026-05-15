@@ -33,7 +33,7 @@ namespace HR.LeaveMangement.Identity
 
             services.AddTransient<IAuthService, AuthService>();
             //services.AddTransient<IUserService, UserService>();
-
+            services.AddScoped<IUserService, LoggedInUserService>();
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

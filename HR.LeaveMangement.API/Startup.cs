@@ -33,6 +33,7 @@ namespace HR.LeaveManagement.API
             services.ConfigureInfrastructureServices(Configuration);
             services.ConfigurePersistenceServices(Configuration);
             services.ConfigureIdentityServices(Configuration);
+            services.AddHttpContextAccessor();
             services.AddTransient<IValidator<CreateLeaveRequestDto>, CreateLeaveRequestDtoValidator>();
             services.AddTransient<IValidator<UpdateLeaveRequestDto>, UpdateLeaveRequestDtoValidator>();
             services.AddControllers();
