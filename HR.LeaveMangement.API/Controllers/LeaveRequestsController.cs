@@ -51,7 +51,7 @@ namespace HR.LeaveMangement.API.Controllers
         }
 
         // ==================================================
-        // 🧑‍💼 ADMIN: Get ALL requests
+        //      ADMIN: Get ALL requests
         // ==================================================
         [HttpGet("all")]
         [Authorize(Roles = "Administrator")]

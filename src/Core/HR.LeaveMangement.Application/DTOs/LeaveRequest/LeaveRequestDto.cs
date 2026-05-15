@@ -17,6 +17,7 @@ namespace HR.LeaveMangement.Application.DTOs.LeaveRequest
 
         public string LeaveTypeName { get; set; } =string.Empty;
 
+        public string RequestingEmployeeId { get; set; } = string.Empty;
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
