@@ -3,6 +3,7 @@ using HR.LeaveMangement.Application.Features.LeaveAllocations.Request.Commands;
 using HR.LeaveMangement.Application.Features.LeaveAllocations.Request.Queries;
 using HR.LeaveMangement.Application.Responses;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -22,6 +23,7 @@ namespace HR.LeaveMangement.API.Controllers
 
         // GET: api/<LeaveAllocationsController>
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<List<LeaveAllocationsDto>>> Get(bool isLoggedInUser = false)
         {
             var leaveAllocations = await _mediator.Send(new GetLeaveAllocationListRequest());
@@ -30,6 +32,7 @@ namespace HR.LeaveMangement.API.Controllers
 
         // GET api/<LeaveAllocationsController>/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<LeaveAllocationsDto>> Get(int id)
         {
             var leaveAllocation = await _mediator.Send(new GetLeaveAllocationDeatailRequest { Id = id });
@@ -38,6 +41,7 @@ namespace HR.LeaveMangement.API.Controllers
 
         // POST api/<LeaveAllocationsController>
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> Post([FromBody] CreateLeaveAllocationDto leaveAllocation)
         {
             var command = new CreateLeaveAllocationCommand { LeaveAllocationDto = leaveAllocation };
@@ -47,6 +51,7 @@ namespace HR.LeaveMangement.API.Controllers
 
         // PUT api/<LeaveAllocationsController>/5
         [HttpPut]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> Put([FromBody] UpdateLeaveAllocationDto leaveAllocation)
         {
             var command = new UpdateLeaveAllocationCommand { LeaveAllocationsDto = leaveAllocation };
@@ -56,6 +61,7 @@ namespace HR.LeaveMangement.API.Controllers
 
         // DELETE api/<LeaveAllocationsController>/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> Delete(int id)
         {
             var command = new DeleteLeaveAllocationCommand { Id = id };

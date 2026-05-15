@@ -14,10 +14,12 @@ namespace HR.LeaveMangement.Application.DTOs.LeaveRequest.Validators
 
         public UpdateLeaveRequestDtoValidator(ILeaveTypeRepository leaveTypeRepository)
         {
+            // এই লাইনটি যোগ করুন
             _leaveTypeRepository = leaveTypeRepository;
-            Include(new ILeaveRequestDtoValidator(_leaveTypeRepository));
 
-            RuleFor(p => p.Id).NotNull().WithMessage("{PropertyName} must be present");
+            RuleFor(p => p.Id)
+                .NotNull()
+                .WithMessage("Id is required");
         }
     }
 }

@@ -31,6 +31,7 @@ namespace HR.LeaveMangement.API.Controllers
 
         // GET api/<LeaveTypesController>/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<LeaveTypeDto>> Get(int id)
         {
              var leaveType = await _mediator.Send(new GetLeaveTypeDetailRequest { Id = id });
@@ -39,6 +40,7 @@ namespace HR.LeaveMangement.API.Controllers
 
         // POST api/<LeaveTypesController>
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> Post([FromBody] CreateLeaveTypeDto leaveTypeDto)
         {
             var command = new CreateLeaveTypeCommand { LeaveTypeDto = leaveTypeDto };
@@ -48,6 +50,7 @@ namespace HR.LeaveMangement.API.Controllers
 
         // PUT api/<LeaveTypesController>/5
         [HttpPut]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> Put([FromBody] LeaveTypeDto leaveType)
         {
             var command = new UpdateLeaveTypeCommand {  LeaveTypeDto =leaveType };
@@ -58,6 +61,7 @@ namespace HR.LeaveMangement.API.Controllers
 
         // DELETE api/<LeaveTypesController>/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async  Task<ActionResult> Delete(int id)
         {
             var command = new DeleteLeaveTypeCommand { Id = id };

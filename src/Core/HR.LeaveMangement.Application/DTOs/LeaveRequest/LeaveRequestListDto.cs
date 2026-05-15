@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace HR.LeaveMangement.Application.DTOs.LeaveRequest
 {
-    public class LeaveRequestListDto: BaseDto
+    public class LeaveRequestListDto : BaseDto
     {
-        public LeaveTypeDto LeaveType { get; set; }
-        public DateTime DateRequest { get; set; }
+        public LeaveTypeDto? LeaveType { get; set; }
+        public DateTime DateRequested { get; set; }
         public bool? Approved { get; set; }
     }
 }

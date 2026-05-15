@@ -1,13 +1,16 @@
-﻿using HR.LeaveMangement.Application;
-using HR.LeaveMangement.Persistence;
+﻿using FluentValidation;
+using HR.LeaveMangement.Application;
+using HR.LeaveMangement.Application.DTOs.LeaveRequest;
+using HR.LeaveMangement.Application.DTOs.LeaveRequest.Validators;
+using HR.LeaveMangement.Identity;
 using HR.LeaveMangement.Infrastructure;
+using HR.LeaveMangement.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using HR.LeaveMangement.Identity;
 
 namespace HR.LeaveManagement.API
 {
@@ -30,7 +33,8 @@ namespace HR.LeaveManagement.API
             services.ConfigureInfrastructureServices(Configuration);
             services.ConfigurePersistenceServices(Configuration);
             services.ConfigureIdentityServices(Configuration);
-
+            services.AddTransient<IValidator<CreateLeaveRequestDto>, CreateLeaveRequestDtoValidator>();
+            services.AddTransient<IValidator<UpdateLeaveRequestDto>, UpdateLeaveRequestDtoValidator>();
             services.AddControllers();
 
             //services.AddSwaggerGen(c =>

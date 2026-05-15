@@ -9,25 +9,21 @@ using System.Threading.Tasks;
 
 namespace HR.LeaveMangement.Application.DTOs.LeaveRequest
 {
-    public class LeaveRequestDto:BaseDto
+
+    public class LeaveRequestDto 
     {
+
+        public int Id { get; set; }
+
+        public string LeaveTypeName { get; set; } =string.Empty;
+
         public DateTime StartDate { get; set; }
-
         public DateTime EndDate { get; set; }
-
-        public LeaveTypeDto LeaveType { get; set; } = default!;
-
-        public int LeaveTypeId { get; set; }
 
         public DateTime DateRequested { get; set; }
 
-        public string? RequestCommnents { get; set; }
+        public bool? Approved { get; set; }
 
-
-        public DateTime? DateActioned { get; set; }
-
-        public bool? Aprroved { get; set; }
-
-        public bool Cancelled { get; set; }
+        public string? Status { get; set; }
     }
 }

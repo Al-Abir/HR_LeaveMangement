@@ -1,11 +1,9 @@
 ﻿using HR.LeaveMangement.Application.DTOs.LeaveRequest;
 using HR.LeaveMangement.Application.Features.LeaveRequests.Requests.Commands;
 using HR.LeaveMangement.Application.Features.LeaveRequests.Requests.Queries;
-using HR.LeaveMangement.Application.Responses;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace HR.LeaveMangement.API.Controllers
 {
@@ -13,8 +11,6 @@ namespace HR.LeaveMangement.API.Controllers
     [ApiController]
     public class LeaveRequestsController : ControllerBase
     {
-
-
         private readonly IMediator _mediator;
 
         public LeaveRequestsController(IMediator mediator)
@@ -22,54 +18,99 @@ namespace HR.LeaveMangement.API.Controllers
             _mediator = mediator;
         }
 
-        // GET: api/<LeaveRequestsController>
-        [HttpGet]
-        public async Task<ActionResult<List<LeaveRequestListDto>>> Get()
-        {
-            var leaveRequests = await _mediator.Send(new GetLeaveRequestListRequest());
-            return Ok(leaveRequests);
-        }
-
-        // GET api/<LeaveRequestsController>/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<LeaveRequestDto>> Get(int id)
-        {
-            var leaveRequest = await _mediator.Send(new GetLeaveRequestDetailRequest { Id = id });
-            return Ok(leaveRequest);
-        }
-
-        // POST api/<LeaveRequestsController>
+        // ==================================================
+        // 👤 EMPLOYEE: Create Leave Request
+        // ==================================================
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] CreateLeaveRequestDto leaveRequest)
+        [Authorize(Roles = "Employee")]
+        public async Task<ActionResult> Create([FromBody] CreateLeaveRequestDto dto)
         {
-            var command = new CreateLeaveRequestCommand { LeaveRequestDto = leaveRequest };
-            var repsonse = await _mediator.Send(command);
-            return Ok(repsonse);
+            var command = new CreateLeaveRequestCommand
+            {
+                LeaveRequestDto = dto
+            };
+
+            var response = await _mediator.Send(command);
+            return Ok(response);
         }
 
-        // PUT api/<LeaveRequestsController>/5
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, [FromBody] UpdateLeaveRequestDto leaveRequest)
+        // ==================================================
+        //     EMPLOYEE: Get only my requests
+        // ==================================================
+        [HttpGet("my-requests")]
+        [Authorize(Roles = "Employee")]
+        public async Task<ActionResult<LeaveRequestDto>> GetMyRequests()
         {
-            var command = new UpdateLeaveRequestCommand { Id = id, LeaveRequestDto = leaveRequest };
-            await _mediator.Send(command);
-            return NoContent();
+            var query = new GetLeaveRequestListRequest
+            {
+                IsAdmin = false
+            };
+
+            var result = await _mediator.Send(query);
+            return Ok(result);
         }
 
-        // PUT api/<LeaveRequestsController>/changeapproval/5
+        // ==================================================
+        // 🧑‍💼 ADMIN: Get ALL requests
+        // ==================================================
+        [HttpGet("all")]
+        [Authorize(Roles = "Administrator")]
+        public async Task<ActionResult<List<LeaveRequestListDto>>> GetAll()
+        {
+            var query = new GetLeaveRequestListRequest
+            {
+                IsAdmin = true
+            };
+
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        // ==================================================
+        // 🔍 COMMON: Get request by id (Admin or Owner)
+        // ==================================================
+        [HttpGet("{id}")]
+        [Authorize]
+        public async Task<ActionResult<List<LeaveRequestDto>>> GetById(int id)
+        {
+            var query = new GetLeaveRequestDetailRequest
+            {
+                Id = id
+            };
+
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        
+        //ADMIN: Approve / Reject
+        // ==================================================
         [HttpPut("changeapproval/{id}")]
-        public async Task<ActionResult> ChangeApproval(int id, [FromBody] ChangeLeaveRequestApprovalDto changeLeaveRequestApproval)
+        [Authorize(Roles = "Administrator")]
+        public async Task<ActionResult> ChangeApproval(int id, [FromBody] ChangeLeaveRequestApprovalDto dto)
         {
-            var command = new UpdateLeaveRequestCommand { Id = id, ChangeLeaveRequestApprovalDto = changeLeaveRequestApproval };
+            var command = new UpdateLeaveRequestCommand
+            {
+                Id = id,
+                ChangeLeaveRequestApprovalDto = dto
+            };
+
             await _mediator.Send(command);
             return NoContent();
         }
 
-        // DELETE api/<LeaveRequestsController>/5
+        // ==================================================
+        // 🧑‍💼 ADMIN: Delete request
+        // ==================================================
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> Delete(int id)
         {
-            var command = new DeleteLeaveRequestCommand { Id = id };
+            var command = new DeleteLeaveRequestCommand
+            {
+                Id = id
+            };
+
             await _mediator.Send(command);
             return NoContent();
         }
